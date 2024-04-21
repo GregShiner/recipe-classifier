@@ -5,19 +5,18 @@ import pickle
 import polars as pl
 import threading
 from xgboost import XGBClassifier
-# # Load keywords from keywords.txt
-# with open('keywords.txt', 'r') as f:
-#     keywords = f.read().splitlines()
-
-# df = pl.read_parquet('parquets/recipes-joined.parquet')
-# # df = pd.read_parquet('parquets/recipes-joined.parquet')
+import gdown
+import os
 
 # Asynchronously load the data
 df = None
+
+
 def load_data():
     global df
     df = pl.read_parquet('parquets/recipes-joined.parquet')
     # df = pd.read_parquet('parquets/recipes-joined.parquet')
+
 
 def get_keywords():
     """
@@ -25,6 +24,7 @@ def get_keywords():
     """
     with open('keywords.txt', 'r') as f:
         return f.read().splitlines()
+
 
 def vectorize(unique_elems: List[str], input_elems: List[str]) -> List[int]:
     """Creates a vector of 1s and 0s, where a 1 indicates that the element at that index
@@ -35,13 +35,15 @@ def vectorize(unique_elems: List[str], input_elems: List[str]) -> List[int]:
             vector[unique_elems.index(unique_elem)] = 1
     return vector
 
+
 def unique_elems(element_lists: List[List[str]]) -> List[str]:
     """Creates a list of all of the unique strings in the input lists
     This potentially be accomplished in a better way using sets, but sets 
     do not guarantee a specific order, which is necessary to keep the feature
     order consistent."""
     unique = []
-    unique_set = set() # Uses a set to (theoretically) trade some extra memory usage to make `in` run in constant time
+    # Uses a set to (theoretically) trade some extra memory usage to make `in` run in constant time
+    unique_set = set()
     for element_list in element_lists:
         for element in element_list:
             if element not in unique_set:
@@ -49,7 +51,14 @@ def unique_elems(element_lists: List[List[str]]) -> List[str]:
                 unique.append(element)
     return unique
 
+
 def main():
+    # Download the parquet file if it does not exist
+    if not os.path.exists('parquets/recipes-joined.parquet'):
+        print('Downloading data...')
+        gdown.download(
+            'https://drive.google.com/uc?id=1Or9udvyR64KZh3Un-wLCSNSnDn9D4lAh', 'parquets/recipes-joined.parquet', quiet=False)
+        print('Data downloaded.')
     global df
     thread = threading.Thread(target=load_data)
     thread.start()
@@ -60,13 +69,16 @@ def main():
     # Get the keywords
     keywords = get_keywords()
 
-    chosen_keywords = iterfzf.iterfzf(keywords, multi=True, prompt="Choose keywords: ")
+    chosen_keywords = iterfzf.iterfzf(
+        keywords, multi=True, prompt="Choose keywords: ")
     # Ensure the user picks between 2 and 5 keywords
-    while len(chosen_keywords) < 1 or len(chosen_keywords) > 5: # TODO: Change 1 to 2 (this was done for testing purposes)
+    # TODO: Change 1 to 2 (this was done for testing purposes)
+    while len(chosen_keywords) < 1 or len(chosen_keywords) > 5:
         print('Please choose between 2 and 5 keywords. Press enter to continue.')
         input()
-        chosen_keywords = iterfzf.iterfzf(keywords, multi=True, prompt="Choose keywords: ")
-    
+        chosen_keywords = iterfzf.iterfzf(
+            keywords, multi=True, prompt="Choose keywords: ")
+
     # Wait for the data to be loaded
     if df is None:
         print('Loading data...')
@@ -74,7 +86,7 @@ def main():
     print('Data loaded.')
 
     old_keywords = unique_elems(df['Keywords'].to_list())
-    
+
     # Ensure that the keywords in the keywords.txt file are the same as the keywords in the DataFrame
     # assert keywords == old_keywords, 'The keywords in the keywords.txt file do not match the keywords in the DataFrame.'
     # There is a None in old_keywords, find its index
@@ -99,7 +111,8 @@ def main():
 
     # Predict the healthiness of the recipe
     prediction = model.predict([chosen_keywords_vector])
-    print(f'The keywords, {chosen_keywords}, are most likely going to result in a', 'healthy' if prediction[0] == 1 else 'unhealthy', 'recipe.')
+    print(f'The keywords, {chosen_keywords}, are most likely going to result in a',
+          'healthy' if prediction[0] == 1 else 'unhealthy', 'recipe.')
 
     # Find the top 5 lowest NutrientScore recipes
     top_5 = df.sort('NutrientScore').head(5)
@@ -112,13 +125,17 @@ def main():
     top_5.write_csv('top_5.csv')
     # Create a new column called "FormattedName"
     # This ugly 1-liner removes all non-alphanumeric characters, replaces spaces with hyphens, and makes the string lowercase
+
     def format_name(name):
         return ''.join(e for e in name if e.isalnum() or e == ' ').lower().replace(' ', '-')
     # top_5 = top_5.with_columns(FormattedName = ''.join(e for e in pl.col('Name').to_list()[0] if e.isalnum() or e == ' ').lower().replace(' ', '-'))
-    top_5 = top_5.with_columns(pl.col('Name').map_elements(format_name, str).alias('FormattedName'))
+    top_5 = top_5.with_columns(pl.col('Name').map_elements(
+        format_name, str).alias('FormattedName'))
     print('Here are links to the top 5 healthiest recipes:')
     # links have the following format: https://www.food.com/recipe/<recipe-name>-<recipe-id>
     for row in top_5.iter_rows(named=True):
-        print(f'https://www.food.com/recipe/{row["FormattedName"]}-{int(row["RecipeId"])}')
+        print(
+            f'https://www.food.com/recipe/{row["FormattedName"]}-{int(row["RecipeId"])}')
+
 
 main()
