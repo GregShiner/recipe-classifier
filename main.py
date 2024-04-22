@@ -53,6 +53,9 @@ def unique_elems(element_lists: List[List[str]]) -> List[str]:
 
 
 def main():
+    # If the parquets directory does not exist, create it
+    if not os.path.exists('parquets'):
+        os.makedirs('parquets')
     # Download the parquet file if it does not exist
     if not os.path.exists('parquets/recipes-joined.parquet'):
         print('Downloading data...')
