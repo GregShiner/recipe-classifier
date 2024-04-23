@@ -6,7 +6,26 @@
 
 ## Project Goals
 
-<iframe src="https://www.desmos.com/calculator/gc5oqjhi9t?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+**High-Level Goals**
+
+- Help the public make better meal choices that align with their interests
+- Help better inform the public regarding the healthiness of their dietary choices
+- Provide recipe recommendations by healthiness to end-user based on the selected keywords, and only if there exists a recipe with all the selected keywords
+
+**Technical Goals**
+
+- Build a corpus of recipes that are manually labeled as healthy / unhealthy based on the
+Food & Drug Administration (FDA) criterion on Nutritional Facts Panel(s) of various
+meals
+
+- Develop a classification algorithm that can derive whether a meal will be 
+healthy / unhealthy based on selected keywords
+
+- Develop a meal recommendation algorithm to provide healthy recipes that have all the keywords selected by the user
+
+## Significance & Novelty
+
+
 
 ## Application Showcase
 
@@ -15,20 +34,20 @@
 ## Production Environment Dependency Requirements
 
 To utilize our end-user application to generate recipe recommendations 
-and its healthiness, you must have the following dependencies setup on your host machine. Each of the dependencies link to their respective setup instructions per your host machine's operating system.
+and its healthiness, you must have the following dependencies setup on your host machine. Each of the dependencies links to their respective setup instructions per your host machine's operating system.
 
 - [Python >= 3.8](https://wiki.python.org/moin/BeginnersGuide/Download)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Internet Connection to download recipe database from our public Google Drive
 
-The following instructions will be for pip (Python's standard package manager), but can be adapated to your own desired package management / dependency management tool for Python.
+The following instructions will be for pip (Python's standard package manager), but can be adapted to your own desired package management / dependency management tool for Python.
 
 See [Project Dependency Installation Instructions](#project-dependency-installation-instructions)
 
 After you are done setting up the dependencies on your host machine, run the end-user application by executing the following command from the project's root directory.
 
 > [!NOTE]
-> The end-user application will download the recipes database into the `parquets` folder, and this file is about 300MB, so it might take some time to download depending on your host machine's internet connection.
+> The end-user application will download the recipes database into the `parquets` folder, and this file is about 300 MB, so it might take some time to download depending on your host machine's internet connection.
 
 ```sh
 python main.py
@@ -44,7 +63,7 @@ python main.py
 
 ## Development Environment Dependency Requirements
 
-To investigate our code or develop it further for your own uses, please ensure all of the following dependencies are installed on your host machine / development environment. The configuration can be customized to your liking, however, this is our current reccommended setup for this project.
+To investigate our code or develop it further for your own uses, please ensure all the following dependencies are installed on your host machine / development environment. The configuration can be customized to your liking, however, this is our current recommended setup for this project.
 
 - [Python >= 3.8](https://wiki.python.org/moin/BeginnersGuide/Download)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -60,7 +79,7 @@ After you are done setting up the project dependency installation instructions, 
 ### 1. Clone our repository onto your Host Machine
 
 To execute our end-user application, you must download our source code in order
-to run the end-user application. To "download" our source code, clone our  repository to your local system.
+to run the end-user application. To "download" our source code, clone our repository to your local system.
 
 ```sh
 git clone https://github.com/GregShiner/recipe-classifier.git
@@ -72,12 +91,12 @@ We prefer if user(s) activated a venv to avoid polluting their global package na
 
 To activate a venv, follow the [instructions](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#create-a-new-virtual-environment) dedicated towards your specific host machine's OS in order to create and activate virtual environment. 
 
-### 3. Install Required Packages for end-user application
+### 3. Install Required Packages
 
 > [!CAUTION]
 > Ensure that you have a virtual environment activated to avoid polluting your global package namespace.
 
-In order to install the dependencies for our end-user application, you must install the required packages from our `requirements.txt`. To do this, you can execute the following commands within your terminal application at the project's root directory.
+In order to install the all dependencies (development & end-user application), you must install the required packages from our `requirements.txt`. To do this, you can execute the following commands within your terminal application at the project's root directory.
 
 ```sh
 pip install -r requirements.txt
