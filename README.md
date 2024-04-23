@@ -4,11 +4,13 @@
   <p align="center">Stuck on what to make for dinner? Let Meal Prep Aide guide the way!</p>
 </div>
 
-#TODO: Have GIF of EndUser Application
-
 ## Project Description
 
 
+
+## Application Showcase
+
+[![Application Showcase](report_assets/application_showcase.gif)](https://asciinema.org/a/656019)
 
 ## Production Environment Dependency Requirements
 
