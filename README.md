@@ -36,7 +36,11 @@ python main.py
 
 ### End User Application Instructions
 
-#TODO
+1. Select keywords of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
+
+2. Press <kbd>Enter</kbd> once you are happy with the keywords you have selected.
+
+3. Our recommendation and classification algorithm will discuss with you possible recipes that you can make and inform if you have made a healthy choice for your next meal.
 
 ## Development Environment Dependency Requirements
 
