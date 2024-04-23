@@ -22,7 +22,7 @@ def get_keywords():
     """
     Gets the keywords from the keywords.txt file
     """
-    with open('keywords.txt', 'r') as f:
+    with open('keywords/keywords.txt', 'r') as f:
         return f.read().splitlines()
 
 
