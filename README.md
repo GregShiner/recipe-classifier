@@ -9,7 +9,9 @@
 **High-Level Goals**
 
 - Help the public make better meal choices that align with their interests
+
 - Help better inform the public regarding the healthiness of their dietary choices
+
 - Provide recipe recommendations by healthiness to end-user based on the selected keywords, and only if there exists a recipe with all the selected keywords
 
 **Technical Goals**
