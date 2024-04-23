@@ -25,13 +25,19 @@ healthy / unhealthy based on selected keywords
 
 ## Significance & Novelty
 
+[![One in Five Americans Have Diabetes](report_assets/diabetes_stats.png)](https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html)
+
 > [!IMPORTANT]
 > **A healthy diet is essential for good health and nutrition**  
 <br/>It protects you against many chronic noncommunicable diseases, such as heart disease, diabetes and cancer. Eating a variety of foods and consuming less salt, sugars and saturated and industrially-produced trans-fats, are essential for healthy diet.[^1]
 
 [^1]: https://www.who.int/initiatives/behealthy/healthy-diet
 
-Lorem Ipsum
+One's diet is crucial to living a healthy and long life, and many first world countries experience the rising issue of diabetes and diet-related illnesses due to how rich of a selection we have for a meal. With many players in the food industries, it becomes harder and harder for an average person to decide on a healthy meal at the end of the day. 
+
+Through this application, we can streamline the headache of meal planning by suggesting healthy recipes to all of our users. Based on their keywords, we inform the user the healthiness of their decision and provide them various recipes by their nutrition score.
+
+The novelty of this application lies within the streamlined distraction-free experience, where a user can plainly select keywords that align with their current meal interests, and receive the top five meals by their healthiness (nutrition score). Then, they are easily able to recreate the meal by following the recipe's link which provides them with an ingredient list and preparation instructions. 
 
 ## Application Showcase
 
