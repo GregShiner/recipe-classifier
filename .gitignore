@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 
 venv/
+
+# Ignore the recipe database from being commited into the GitHub Repository
+# as it is 300MB which is too large for our repository
+parquets/recipes-joined.parquet
