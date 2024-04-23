@@ -25,10 +25,12 @@ healthy / unhealthy based on selected keywords
 
 ## Significance & Novelty
 
-> **A healthy diet is essential for good health and nutrition**
-> It protects you against many chronic noncommunicable diseases, such as heart disease, diabetes and cancer. Eating a variety of foods and consuming less salt, sugars and saturated and industrially-produced trans-fats, are essential for healthy diet[^1].
+> **A healthy diet is essential for good health and nutrition**  
+<br/>It protects you against many chronic noncommunicable diseases, such as heart disease, diabetes and cancer. Eating a variety of foods and consuming less salt, sugars and saturated and industrially-produced trans-fats, are essential for healthy diet[^1].
 
-[^1]: https://www.who.int/initiatives/behealthy/healthy-diet#:~:text=A%20healthy%20diet%20is%20essential,are%20essential%20for%20healthy%20diet.
+[^1]: https://www.who.int/initiatives/behealthy/healthy-diet
+
+Lorem Ipsum
 
 ## Application Showcase
 
