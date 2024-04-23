@@ -4,9 +4,9 @@
   <p align="center">Stuck on what to make for dinner? Let Meal Prep Aide guide the way!</p>
 </div>
 
-## Project Description
+## Project Goals
 
-
+<iframe src="https://www.desmos.com/calculator/gc5oqjhi9t?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
 
 ## Application Showcase
 
