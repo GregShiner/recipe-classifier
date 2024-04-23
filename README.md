@@ -15,7 +15,7 @@ and its healthiness, you must have the following dependencies setup on your host
 
 The following instructions will be for pip (Python's standard package manager), but can be adapated to your own desired package management / dependency management tool for Python.
 
-See [Project Dependency Installation Instructions](#project-installation-instructions)
+See [Project Dependency Installation Instructions](#project-dependency-installation-instructions)
 
 After you are done setting up the dependencies on your host machine, run the end-user application by executing the following command from the project's root directory.
 
