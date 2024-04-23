@@ -1,6 +1,6 @@
 <div align="center">
   <img src="report_assets/salad-svgrepo-com.svg" alt="Logo" width="80" height="80">
-  <h3 align="center">Meal Prep Aide</h3>
+  <h1 align="center">Meal Prep Aide</h3>
   <p align="center">Stuck on what to make for dinner? Let Meal Prep Aide guide the way!</p>
 </div>
 
