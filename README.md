@@ -83,6 +83,12 @@ In order to install the dependencies for our end-user application, you must inst
 pip install -r requirements.txt
 ```
 
+However, if you only plan on using the main application and not executing code in the notebook or other files, you can install a much smaller requirements file, `requirements_app.txt`.
+
+```sh
+pip install -r requirements_app.txt
+```
+
 ### 4. Return to the Respective Environment Setup Instructions
 
 Continue the instructions to setup your respective environment that you desire to do:
