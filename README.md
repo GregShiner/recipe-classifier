@@ -72,9 +72,39 @@ healthy / unhealthy based on selected keywords
 
 ## Model Development Process
 
+Below is a high-level overview of our development approach and process towards building the pre-trained machine learning model
+that is used to classify if the selected keywords by the end-user will result in a healthy or unhealthy meal.
+
+```mermaid
+flowchart TD
+    subgraph Labeling
+        B[Calculate DVs] --> C
+        C[Calculate Scores for Nutrients] --> D
+        D[Sum Nutrient Scores] --> E
+        E[Label as 'Healthy' or 'Unhealthy'
+          Based on a Score Cutoff]
+    end
+    subgraph Vectorizing
+        F[Create Vector of Unique Keywords] --> G
+        G[Vectorize Every Set of Keywords]
+    end
+    subgraph TrainingModels[Fit Models]
+        I[KNN]
+        J[MLP]
+        K[SVM]
+        L[XGB]
+        M[XGB+PCA]
+    end
+    A(Recipe Dataset) --> Labeling
+    Labeling --> Vectorizing
+    Vectorizing --> H[Drop outliers]
+    H --> TrainingModels
+    TrainingModels --> N(Application)
+```
+
 ### Data Collection
 
-This project is utilizing 
+This project is utilizing a [Kaggle Dataset](https://www.kaggle.com/datasets/irkaal/foodcom-recipes-and-reviews) that scraped Food.com's Recipes and Reviews. Our project mainly focuses on the recipes portion of the dataset, as we utilize this portion to help us classify certain keywords to the healthiness of a meal, recommend recipes by selected keywords and in order of nutrition score (healthiness of a meal).
 
 ## Model Evaluation (Test Results) 
 
