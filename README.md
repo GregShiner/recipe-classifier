@@ -126,10 +126,7 @@ ProteinContent (grams)
 
 With this information, we had to define what necessarily contributed towards a recipe / meal being classified as healthy, so we can associate keywords to it. Our definition relied on the FDA's recommended "Daily Value on the Nutrition and Supplement Facts Label".[^2] The consensus for each nutrients' Daily Value percentages was around 5-20%, where below this threshold was generally considered as low, and above was considered as high intake.
 
-[^2]: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
-
-As each nutrient would have their daily value measurement, we calculated the Daily Value for each recipe by converting each of their nutritional content into a daily value percentage, and dropped columns where their nutrient category did not have a specified value. Below is the reference guide, which we utilized towards converting each of the provided
-nutrient categories within the recipe towards their respective daily value percentage.
+As each nutrient would have their daily value measurement, we calculated the Daily Value for each recipe by converting each of their nutritional content into a daily value percentage, and dropped columns where their nutrient category did not have a specified value. Below is the reference guide[^2], which we utilized towards converting each of the provided nutrient categories within the recipe towards their respective daily value percentage.
 
 | Nutrient            | Current Daily Value      |
 |---------------------|--------------------------|
@@ -169,6 +166,7 @@ nutrient categories within the recipe towards their respective daily value perce
 | Vitamin K           | 120mcg                   |
 | Zinc                | 11mg                     |
 
+[^2]: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
 
 #TODO
 - Talk about NutritionScore (How we came up with it, what it means)
