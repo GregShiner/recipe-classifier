@@ -110,7 +110,7 @@ This project is utilizing a [Kaggle Dataset](https://www.kaggle.com/datasets/irk
 
 #### Labeling
 
-Our original dataset did not come with a classification regarding if a specific recipe was healthy or not. However, it did come with the nutritional content of each recipe. The following nutritional categories were provided as a numerical value:
+Our original dataset did not come with a classification regarding if a specific recipe was healthy or not. As such, we had to manually figure out a method when it came classifying our recipes as healthy or unhealthy. Fortunately, the original dataset did come with the nutritional content of each recipe. The following nutritional categories were provided as a numerical value:
 
 ```
 Calories (kcal)
@@ -124,9 +124,9 @@ SugarContent (grams)
 ProteinContent (grams)
 ```
 
-With this information, we had to define what necessarily contributed towards a recipe / meal being classified as healthy, so we can associate keywords to it. Our definition relied on the FDA's recommended "Daily Value on the Nutrition and Supplement Facts Label".[^2] The consensus for each nutrients' Daily Value percentages was around 5-20%, where below this threshold was generally considered as low, and above was considered as high intake.
+With this information, we had to define what nutrient amounts necessarily contributed towards a recipe / meal being classified as healthy, so we can associate keywords to it. Our definition relied on the FDA's recommended "Daily Value on the Nutrition and Supplement Facts Label" article.[^2] The consensus for each nutrients' Daily Value percentages was around 5-20%, where below this threshold was generally considered as low, and above was considered as high intake.
 
-As each nutrient would have their daily value measurement, we calculated the Daily Value for each recipe by converting each of their nutritional content into a daily value percentage, and dropped columns where their nutrient category did not have a specified value. Below is the reference guide[^2], which we utilized towards converting each of the provided nutrient categories within the recipe towards their respective daily value percentage.
+As each nutrient would have their own daily value measurement, we calculated the Daily Value Percentage for each recipe by converting each of their nutritional contents into their respective daily value percentages, and dropped columns where their nutrient category did not have a specified value from the FDA. Below is the reference guide[^2], which we utilized towards converting each of the provided nutrient categories within the recipe towards their respective daily value percentage.
 
 | Nutrient            | Current Daily Value      |
 |---------------------|--------------------------|
@@ -168,10 +168,24 @@ As each nutrient would have their daily value measurement, we calculated the Dai
 
 [^2]: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
 
+At this point, each recipe had a daily value percentage representation of the following nutritional categories, which we then combined into our own metric that we reference as "nutrition score" which represents the healthiness of a recipe. Unfortunately, we had to drop the `SugarContent` from each recipe as the FDA did not have a clear unified consensus on the daily intake of sugar either in grams or as a daily value percentage.  
+
+**Remaining Daily Value Percent Representations of Nutrition Content within each Recipe**
+```
+Daily Value Percent Calories (%)
+Daily Value Percent FatContent (%)
+Daily Value Percent SaturatedFatContent (%)
+Daily Value Percent CholesterolContent (%)
+Daily Value Percent SodiumContent (%)
+Daily Value Percent CarbohydrateContent (%)
+Daily Value Percent FiberContent (%)
+Daily Value Percent ProteinContent (%)
+```
+
 #TODO
 - Talk about NutritionScore (How we came up with it, what it means)
 - Visualize NutrionScore
-- Manual Tagging
+
 #### Vectorizing
 
 #### Nutrient Score - (Calculating Healthiness of a Recipe)
