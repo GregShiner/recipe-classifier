@@ -10,7 +10,7 @@
 
 ### End User Application Instructions
 
-1. Select keywords of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
+1. Select keywords (limit of 2 to 5) of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
 
 2. Press <kbd>Enter</kbd> once you are happy with the keywords you have selected.
 
