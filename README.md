@@ -4,6 +4,51 @@
   <p align="center">Stuck on what to make for dinner? Let Meal Prep Aide guide the way!</p>
 </div>
 
+## Application Showcase
+
+[![Application Showcase](report_assets/application_showcase.gif)](https://asciinema.org/a/656019)
+
+### End User Application Instructions
+
+1. Select keywords of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
+
+2. Press <kbd>Enter</kbd> once you are happy with the keywords you have selected.
+
+3. Our recommendation and classification algorithm will discuss with you possible recipes that you can make and inform if you have made a healthy choice for your next meal.
+
+## Application Functionality
+
+Our application is a Command-Line Interface (CLI) tool, where the user can provide generic keywords regarding the meal theme that they want to prepare for their day. To get started, our application will download our recipes database from our Google Drive. Then, we will ask the user to select keywords that align with their meal preferences. After the user selects their keywords, our pre-trained machine learning model will classify whether their selected keywords will lead to a healthy meal, and we recommend recipes that align with their chosen keywords and output them in order of their nutrition score.
+
+- Downloads the latest recipe database from our Google Drive
+- Select multiple keywords based on your meal theme
+- Classifies whether the meal prepared with your selected keywords will be healthy or unhealthy
+- Fetches the top 5 recommended recipes that align with the selected keywords
+
+### The Recommendation Algorithm
+
+
+
+## Significance & Novelty
+
+<div align="center">
+    <a href="https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html">
+        <img src="report_assets/diabetes_stats.png" alt="One in Five Americans Have Diabetes" width="500" height="500">
+    </a>
+</div>
+
+> [!IMPORTANT]
+> **A healthy diet is essential for good health and nutrition**  
+<br/>It protects you against many chronic noncommunicable diseases, such as heart disease, diabetes and cancer. Eating a variety of foods and consuming less salt, sugars and saturated and industrially-produced trans-fats, are essential for healthy diet.[^1]
+
+[^1]: https://www.who.int/initiatives/behealthy/healthy-diet
+
+One's diet is crucial to living a healthy and long life, and many first world countries experience the rising issue of diabetes and diet-related illnesses due to how rich of a selection we have for a meal. With many players in the food industries, it becomes harder and harder for an average person to decide on a healthy meal at the end of the day. 
+
+Through this application, we can streamline the headache of meal planning by suggesting healthy recipes to all of our users. Based on their keywords, we inform the user the healthiness of their decision and provide them various recipes by their nutrition score.
+
+The novelty of this application lies within the streamlined distraction-free experience, where a user can plainly select keywords that align with their current meal interests, and receive the top five meals by their healthiness (nutrition score). Then, they are easily able to recreate the meal by following the recipe's link which provides them with an ingredient list and preparation instructions.
+
 ## Project Goals
 
 **High-Level Goals**
@@ -25,41 +70,17 @@ healthy / unhealthy based on selected keywords
 
 - Develop a meal recommendation algorithm to provide healthy recipes that have all the keywords selected by the user
 
-## Significance & Novelty
+## Model Development Process
 
-<div align="center">
-    <a href="https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html">
-        <img src="report_assets/diabetes_stats.png" alt="One in Five Americans Have Diabetes" width="500" height="500">
-    </a>
-</div>
+### Data Collection
 
-> [!IMPORTANT]
-> **A healthy diet is essential for good health and nutrition**  
-<br/>It protects you against many chronic noncommunicable diseases, such as heart disease, diabetes and cancer. Eating a variety of foods and consuming less salt, sugars and saturated and industrially-produced trans-fats, are essential for healthy diet.[^1]
+This project is utilizing 
 
-[^1]: https://www.who.int/initiatives/behealthy/healthy-diet
+## Model Evaluation (Test Results) 
 
-One's diet is crucial to living a healthy and long life, and many first world countries experience the rising issue of diabetes and diet-related illnesses due to how rich of a selection we have for a meal. With many players in the food industries, it becomes harder and harder for an average person to decide on a healthy meal at the end of the day. 
+## Discussion
 
-Through this application, we can streamline the headache of meal planning by suggesting healthy recipes to all of our users. Based on their keywords, we inform the user the healthiness of their decision and provide them various recipes by their nutrition score.
-
-The novelty of this application lies within the streamlined distraction-free experience, where a user can plainly select keywords that align with their current meal interests, and receive the top five meals by their healthiness (nutrition score). Then, they are easily able to recreate the meal by following the recipe's link which provides them with an ingredient list and preparation instructions. 
-
-## Application Functionality
-
-
-
-## Application Showcase
-
-[![Application Showcase](report_assets/application_showcase.gif)](https://asciinema.org/a/656019)
-
-### End User Application Instructions
-
-1. Select keywords of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
-
-2. Press <kbd>Enter</kbd> once you are happy with the keywords you have selected.
-
-3. Our recommendation and classification algorithm will discuss with you possible recipes that you can make and inform if you have made a healthy choice for your next meal.
+## Conclusion
 
 ## Production Environment Dependency Requirements
 
