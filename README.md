@@ -106,6 +106,82 @@ flowchart TD
 
 This project is utilizing a [Kaggle Dataset](https://www.kaggle.com/datasets/irkaal/foodcom-recipes-and-reviews) that scraped Food.com's Recipes and Reviews. Our project mainly focuses on the recipes portion of the dataset, as we utilize this portion to help us classify certain keywords to the healthiness of a meal, recommend recipes by selected keywords and in order of nutrition score (healthiness of a meal).
 
+### Preprocessing
+
+#### Labeling
+
+Our original dataset did not come with a classification regarding if a specific recipe was healthy or not. However, it did come with the nutritional content of each recipe. The following nutritional categories were provided as a numerical value:
+
+```
+Calories (kcal)
+FatContent (grams)
+SaturatedFatContent (grams)
+CholesterolContent (grams)
+SodiumContent (grams)
+CarbohydrateContent (grams)
+FiberContent (grams)
+SugarContent (grams)
+ProteinContent (grams)
+```
+
+With this information, we had to define what necessarily contributed towards a recipe / meal being classified as healthy, so we can associate keywords to it. Our definition relied on the FDA's recommended "Daily Value on the Nutrition and Supplement Facts Label".[^2] The consensus for each nutrients' Daily Value percentages was around 5-20%, where below this threshold was generally considered as low, and above was considered as high intake.
+
+[^2]: https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
+
+As each nutrient would have their daily value measurement, we calculated the Daily Value for each recipe by converting each of their nutritional content into a daily value percentage, and dropped columns where their nutrient category did not have a specified value. Below is the reference guide, which we utilized towards converting each of the provided
+nutrient categories within the recipe towards their respective daily value percentage.
+
+| Nutrient            | Current Daily Value      |
+|---------------------|--------------------------|
+| Added sugars        | 50g                      |
+| Biotin              | 30mcg                    |
+| Calcium             | 1300mg                   |
+| Chloride            | 2300mg                   |
+| Choline             | 550mg                    |
+| Cholesterol         | 300mg                    |
+| Chromium            | 35mcg                    |
+| Copper              | 0.9mg                    |
+| Dietary Fiber       | 28g                      |
+| Fat                 | 78g                      |
+| Folate/Folic Acid   | 400mcg DFE               |
+| Iodine              | 150mcg                   |
+| Iron                | 18mg                     |
+| Magnesium           | 420mg                    |
+| Manganese           | 2.3mg                    |
+| Molybdenum          | 45mcg                    |
+| Niacin              | 16mg NE                  |
+| Pantothenic Acid    | 5mg                      |
+| Phosphorus          | 1250mg                   |
+| Potassium           | 4700mg                   |
+| Protein             | 50g                      |
+| Riboflavin          | 1.3mg                    |
+| Saturated fat       | 20g                      |
+| Selenium            | 55mcg                    |
+| Sodium              | 2300mg                   |
+| Thiamin             | 1.2mg                    |
+| Total carbohydrate  | 275g                     |
+| Vitamin A           | 900mcg RAE               |
+| Vitamin B6          | 1.7mg                    |
+| Vitamin B12         | 2.4mcg                   |
+| Vitamin C           | 90mg                     |
+| Vitamin D           | 20mcg                    |
+| Vitamin E           | 15mg alpha-tocopherol    |
+| Vitamin K           | 120mcg                   |
+| Zinc                | 11mg                     |
+
+
+#TODO
+- Talk about NutritionScore (How we came up with it, what it means)
+- Visualize NutrionScore
+- Manual Tagging
+#### Vectorizing
+
+#### Nutrient Score - (Calculating Healthiness of a Recipe)
+
+
+
+#### Removing Outliers
+
 ## Model Evaluation (Test Results) 
 
 ## Discussion
