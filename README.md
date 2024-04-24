@@ -127,7 +127,7 @@ SugarContent (grams)
 ProteinContent (grams)
 ```
 
-With this information, we had to define what nutrient amounts necessarily contributed towards a recipe / meal being classified as healthy, so we can associate keywords to it. Our definition relied on the FDA's recommended "Daily Value on the Nutrition and Supplement Facts Label" article.[^2] The consensus for each nutrients' Daily Value percentages was around 5-20%, where below this threshold was generally considered as low, and above was considered as high intake.
+With this information, we had to define what nutrient amounts necessarily contributed towards a recipe / meal being classified as healthy, so we can associate keywords to it. Our definition of a healthy meal relied on the FDA's recommended "Daily Value on the Nutrition and Supplement Facts Label" article.[^2] The consensus for a healthy threshold regarding each nutrients' Daily Value percentages was 5-20%, where below this threshold was generally considered as low, and above was considered as high intake.
 
 As each nutrient would have their own daily value measurement, we calculated the Daily Value Percentage for each recipe by converting each of their nutritional contents into their respective daily value percentages, and dropped columns where their nutrient category did not have a specified value from the FDA. Below is the reference guide[^2], which we utilized towards converting each of the provided nutrient categories within the recipe towards their respective daily value percentage.
 
@@ -173,7 +173,7 @@ As each nutrient would have their own daily value measurement, we calculated the
 
 At this point, each recipe had a daily value percentage representation of the following nutritional categories, which we then combined into our own metric that we reference as "nutrition score" which represents the healthiness of a recipe. Unfortunately, we had to drop the `SugarContent` from each recipe as the FDA did not have a clear unified consensus on the daily intake of sugar either in grams or as a daily value percentage.  
 
-**Remaining Daily Value Percent Representations of Nutrition Content within each Recipe**
+**Remaining Daily Value Percent (DVP) Representations of Nutrition Content within each Recipe**
 ```
 Daily Value Percent Calories (%)
 Daily Value Percent FatContent (%)
@@ -186,18 +186,25 @@ Daily Value Percent ProteinContent (%)
 ```
 ##### Nutrient Score Definition
 
-We wanted to have a holistic approach towards this process to classify an entire recipe as healthy or unhealthy. To accomplish this, the remaining Daily Value Percentage columns were transformed into our own metric that we labeled as "Nutrient Score". The Nutrient Score is a numerical scale that ranges from $[0, \infty]$, and the core focus is to reward recipes with nutrients that fall into the ideal threshold as "healthier" recipes, otherwise to "punish" recipes with nutrients that are out of the ideal threshold. If a specific nutrient within a recipe has a Daily Value Percentage between $[5, 20]%$, then it will get a score of 0, as we will be summing these nutrient scores across all Daily Value Percent Representations of each nutrient within each recipe. Therefore, a nutrient score of a recipe that is closer to 0 will be recognized as "healthier" because this means the meal contains lots of nutrients that fall into the healthy Daily Value percentage threshold defined by the FDA. Below is our equation, which we applied to every Daily Value Percentage and summed together to get a single column continuous value to help us classify whether a recipe is "healthy" or "unhealthy".
+We wanted to have a holistic approach towards this process to classify an entire recipe as healthy or unhealthy that involved all nutrient information provided from a recipe. To accomplish this, we crafted our own heuristic involving the nutrient information given (that were converted into Daily Value Percentages), as this heuristic is based on the FDA's recommendations. Our heuristic is called "Nutrient Score", which ranges from $[0, \infty]$, and this metric will be calculated across each of the remaining Daily Value Percentages (nutrients with FDA recommendation).
+
+A Nutrient Score will evaluate as 0 for a specific nutrient if its Daily Value Percentage falls into the ideal threshold of 5-20%, otherwise it will begin increasing as the value moves away from the ideal threshold. The heuristic has the parabolic function definition:
 
 $$
-\max\left(0,\alpha\left(x-5\right)\left(x-2\right)\right), where \alpha = 0.1
+\max\left(0,\alpha\left(x-5\right)\left(x-2\right)\right), \alpha = 0.1
 $$
 
-[![Desmos Graph of Nutrient Score Function](report_assets/desmos-graph.svg)](https://www.desmos.com/calculator/abpna2qmro)
+[![Desmos Graph of Nutrient Score Function](report_assets/desmos-graph.svg)](https://www.desmos.com/calculator/ixrgql7g0h)
 
-The core idea is to "reward" recipes that had more categories that fell into this threshold (5-20%) across as many nutrients as possible, and "punish" recipes as being unhealthier that had more categories that fell out of this threshold. $\alpha$ represents the aggressiveness of the "punishment factor" as nutrients fell out of the ideal threshold ([5,20]%), and we came up with this value .
+The $x$ is the percentage of the daily value of a specific nutrient within a recipe.
+
+$\alpha$ 
+
+The $\alpha$ value defines how steep of a punishment a recipe's nutrient will receive if it falls out of the ideal DVP (5-20%). The value was chosen by testing it across various foods and manually reviewing the nutrient scores that were generated for "superfoods" and "celebratory" dishes, and we came to selecting this value after many attempts of manual trial and testing.
+
+The core focus of this function is to reward recipes with many nutrients that fall into the ideal threshold as "healthier" recipes, otherwise to "punish" recipes with nutrients that are out of the ideal threshold.
 
 - Talk about NutritionScore (How we came up with it, what it means)
-- Visualize NutrionScore
 
 ##### Calculate Scores for Nutrients
 
