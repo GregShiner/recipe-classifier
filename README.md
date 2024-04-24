@@ -27,9 +27,11 @@ healthy / unhealthy based on selected keywords
 
 ## Significance & Novelty
 
-<a href="https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html">
-    <img src="report_assets/diabetes_stats.png" alt="One in Five Americans Have Diabetes" width="500" height="500">
-</a>
+<div align="center">
+    <a href="https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html">
+        <img src="report_assets/diabetes_stats.png" alt="One in Five Americans Have Diabetes" width="500" height="500">
+    </a>
+</div>
 
 > [!IMPORTANT]
 > **A healthy diet is essential for good health and nutrition**  
