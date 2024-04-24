@@ -73,7 +73,8 @@ healthy / unhealthy based on selected keywords
 ## Model Development Process
 
 Below is a high-level overview of our development approach and process towards building the pre-trained machine learning model
-that is used to classify if the selected keywords by the end-user will result in a healthy or unhealthy meal.
+that is used to classify if the selected keywords by the end-user will result in a healthy or unhealthy meal. Most of our model
+development can be found within the `main.ipynb` file, and each model we tuned / trained can be found within `models/**.py`.
 
 ```mermaid
 flowchart TD
@@ -110,7 +111,7 @@ This project is utilizing a [Kaggle Dataset](https://www.kaggle.com/datasets/irk
 
 #### Labeling
 
-##### Calculate DVs
+##### Calculate Daily Values (DVs)
 
 Our original dataset did not come with a classification regarding if a specific recipe was healthy or not. As such, we had to manually figure out a method when it came classifying our recipes as healthy or unhealthy. Fortunately, the original dataset did come with the nutritional content of each recipe. The following nutritional categories were provided as a numerical value:
 
@@ -184,7 +185,17 @@ Daily Value Percent FiberContent (%)
 Daily Value Percent ProteinContent (%)
 ```
 ##### Nutrient Score Definition
-#TODO
+
+We wanted to have a holistic approach towards this process to classify an entire recipe as healthy or unhealthy. To accomplish this, the remaining Daily Value Percentage columns were transformed into our own metric that we labeled as "Nutrient Score". The Nutrient Score is a numerical scale that ranges from $[0, \infty]$, and the core focus is to reward recipes with nutrients that fall into the ideal threshold as "healthier" recipes, otherwise to "punish" recipes with nutrients that are out of the ideal threshold. If a specific nutrient within a recipe has a Daily Value Percentage between $[5, 20]%$, then it will get a score of 0, as we will be summing these nutrient scores across all Daily Value Percent Representations of each nutrient within each recipe. Therefore, a nutrient score of a recipe that is closer to 0 will be recognized as "healthier" because this means the meal contains lots of nutrients that fall into the healthy Daily Value percentage threshold defined by the FDA. Below is our equation, which we applied to every Daily Value Percentage and summed together to get a single column continuous value to help us classify whether a recipe is "healthy" or "unhealthy".
+
+$$
+\max\left(0,\alpha\left(x-5\right)\left(x-2\right)\right), where \alpha = 0.1
+$$
+
+[![Desmos Graph of Nutrient Score Function](report_assets/desmos-graph.svg)](https://www.desmos.com/calculator/abpna2qmro)
+
+The core idea is to "reward" recipes that had more categories that fell into this threshold (5-20%) across as many nutrients as possible, and "punish" recipes as being unhealthier that had more categories that fell out of this threshold. $\alpha$ represents the aggressiveness of the "punishment factor" as nutrients fell out of the ideal threshold ([5,20]%), and we came up with this value .
+
 - Talk about NutritionScore (How we came up with it, what it means)
 - Visualize NutrionScore
 
