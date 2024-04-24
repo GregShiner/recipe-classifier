@@ -27,7 +27,9 @@ healthy / unhealthy based on selected keywords
 
 ## Significance & Novelty
 
-[![One in Five Americans Have Diabetes](report_assets/diabetes_stats.png)](https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html)
+<a href="https://www.cdc.gov/diabetes/health-equity/diabetes-by-the-numbers.html">
+    <img src="report_assets/diabetes_stats.png" alt="One in Five Americans Have Diabetes" width="500" height="500">
+</a>
 
 > [!IMPORTANT]
 > **A healthy diet is essential for good health and nutrition**  
@@ -41,9 +43,21 @@ Through this application, we can streamline the headache of meal planning by sug
 
 The novelty of this application lies within the streamlined distraction-free experience, where a user can plainly select keywords that align with their current meal interests, and receive the top five meals by their healthiness (nutrition score). Then, they are easily able to recreate the meal by following the recipe's link which provides them with an ingredient list and preparation instructions. 
 
+## Application Functionality
+
+
+
 ## Application Showcase
 
 [![Application Showcase](report_assets/application_showcase.gif)](https://asciinema.org/a/656019)
+
+### End User Application Instructions
+
+1. Select keywords of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
+
+2. Press <kbd>Enter</kbd> once you are happy with the keywords you have selected.
+
+3. Our recommendation and classification algorithm will discuss with you possible recipes that you can make and inform if you have made a healthy choice for your next meal.
 
 ## Production Environment Dependency Requirements
 
@@ -66,14 +80,6 @@ After you are done setting up the dependencies on your host machine, run the end
 ```sh
 python main.py
 ```
-
-### End User Application Instructions
-
-1. Select keywords of the meal that you are interested in making, by pressing <kbd>Tab</kbd>. You can also traverse different choices by using the arrows keys: <kbd>↑</kbd> or <kbd>↓</kbd>.
-
-2. Press <kbd>Enter</kbd> once you are happy with the keywords you have selected.
-
-3. Our recommendation and classification algorithm will discuss with you possible recipes that you can make and inform if you have made a healthy choice for your next meal.
 
 ## Development Environment Dependency Requirements
 
