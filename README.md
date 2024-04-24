@@ -212,16 +212,13 @@ The core goal of this nutrient score is to sum up all nutrients into a single he
 
 ##### Label Recipes as 'Healthy'/'Unhealthy' Based On Nutrient Score Cutoff
 
-To label (classify) a recipe as 'Healthy' / 'Unhealthy', we want to ensure the nutrient score heuristic we made is relatively close to 0. 
-
-#TODO
-- Define reasoning behind cutoff
-- Percentage of recipes classified into each category
-
+To label a recipe as 'Healthy' / 'Unhealthy', we calculated the percentage of recipes that are within the DV for calories (5-20% of 2000 calories), otherwise known as where recipes had scored 0 for their nutrient score for calories. This percentile of recipes ended up being the threshold for recipe, and this resulted in 50.14% of recipes being labeled as healthy, as most recipes did not exceed the FDA recommended threshold for calories.
 
 #### Vectorizing
 
-- Explain Keywords & Extraction Process
+At this point, every recipe has been manually tagged with our nutrient score and healthy / unhealthy classifier, and we now need to extract the keywords that can represent various recipes from our corpus. Fortunately, our original dataset had every single recipe tagged with keywords that were meant for search engine optimization. We took every single keyword that were utilized across all recipes within our dataset and built our own keyword corpus, which had 315 unique keywords. Most recipes used anywhere between 2-5 keywords to help them be discoverable on the web, and we will end up using the same limit when it comes to end-user figuring out what meal to make and classify whether their meal will end up being a healthy or unhealthy one.
+
+Using this keyword corpus, we went through every single recipe and transformed their keywords' column into a vector of 0s and 1s that represented whether a specific keyword existed within a recipe. As such, we vectorized every set of keywords within each recipe into a one-hot-encoded fashion that is based on our own keyword corpus.
 
 #### Removing Outliers
 
