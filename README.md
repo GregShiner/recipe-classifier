@@ -204,10 +204,15 @@ The core focus of this function is to reward recipes with many nutrients that fa
 
 ##### Calculate Scores for Nutrients
 
+After defining our heuristic, we calculated the nutrient score for each nutrient (per their respective Daily Values), and converted each Nutrient from their Daily Value Percentage representation into their Nutrient Score representation
+
 ##### Sum Nutrient Scores
+
+The core goal of this nutrient score is to sum up all nutrients into a single heuristic that can represent the healthiness of a meal. As such, we summed up every nutrients' nutrient score into one column. Therefore, we can now sort the recipes by their healthiness factor, as recipes that sum closer to 0 represent recipes that have nutrients that fall within the ideal threshold.
 
 ##### Label Recipes as 'Healthy'/'Unhealthy' Based On Nutrient Score Cutoff
 
+To label (classify) a recipe as 'Healthy' / 'Unhealthy', we want to ensure the nutrient score heuristic we made is relatively close to 0. 
 - Define reasoning behind cutoff
 - Percentage of recipes classified into each category
 
