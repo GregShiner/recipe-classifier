@@ -213,12 +213,15 @@ The core goal of this nutrient score is to sum up all nutrients into a single he
 ##### Label Recipes as 'Healthy'/'Unhealthy' Based On Nutrient Score Cutoff
 
 To label (classify) a recipe as 'Healthy' / 'Unhealthy', we want to ensure the nutrient score heuristic we made is relatively close to 0. 
+
+#TODO
 - Define reasoning behind cutoff
 - Percentage of recipes classified into each category
 
 
 #### Vectorizing
 
+- Explain Keywords & Extraction Process
 
 #### Removing Outliers
 
@@ -240,7 +243,11 @@ To label (classify) a recipe as 'Healthy' / 'Unhealthy', we want to ensure the n
 
 ## Discussion
 
+#TODO
+
 ## Conclusion
+
+#TODO
 
 ## Production Environment Dependency Requirements
 
