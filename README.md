@@ -27,7 +27,7 @@ Our application is a Command-Line Interface (CLI) tool, where the user can provi
 
 ### The Recommendation Algorithm
 
-
+#TODO
 
 ## Significance & Novelty
 
@@ -110,6 +110,8 @@ This project is utilizing a [Kaggle Dataset](https://www.kaggle.com/datasets/irk
 
 #### Labeling
 
+##### Calculate DVs
+
 Our original dataset did not come with a classification regarding if a specific recipe was healthy or not. As such, we had to manually figure out a method when it came classifying our recipes as healthy or unhealthy. Fortunately, the original dataset did come with the nutritional content of each recipe. The following nutritional categories were provided as a numerical value:
 
 ```
@@ -181,20 +183,41 @@ Daily Value Percent CarbohydrateContent (%)
 Daily Value Percent FiberContent (%)
 Daily Value Percent ProteinContent (%)
 ```
-
+##### Nutrient Score Definition
 #TODO
 - Talk about NutritionScore (How we came up with it, what it means)
 - Visualize NutrionScore
 
+##### Calculate Scores for Nutrients
+
+##### Sum Nutrient Scores
+
+##### Label Recipes as 'Healthy'/'Unhealthy' Based On Nutrient Score Cutoff
+
+- Define reasoning behind cutoff
+- Percentage of recipes classified into each category
+
+
 #### Vectorizing
-
-#### Nutrient Score - (Calculating Healthiness of a Recipe)
-
 
 
 #### Removing Outliers
 
+- Manually via DataWrangler
+
 ## Model Evaluation (Test Results) 
+
+- Explain Execution Context when it came to Model Training & Evaluation (Server Setup)
+- Evaluation Metrics
+
+#### Fit Models
+
+- What models did we fit it under?
+- What was its performance?
+- Did it have any issues particular issues?
+- Was its hyperparameters tuned, if so explain how?
+- Show bar graph of model accuracies
+
 
 ## Discussion
 
