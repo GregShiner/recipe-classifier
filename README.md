@@ -34,7 +34,7 @@ flowchart TD
     C --> D[Vectorize Keywords]
     D --> E[Classify Keywords Using Pre-trained XGB Model]
     E --> F[Filter for Recipes With Keywords]
-    F --> G[Sort by Nutrition Rating]
+    F --> G[Sort by Nutrition Score]
     G --> H[Display the Top 5 Results]
 ```
 
@@ -49,9 +49,8 @@ Then, the application performs the following steps:
 1. Filter all recipes for a recipe that has all selected keywords from the user
 1. Get the URLs for the top 5 healthiest filtered recipes
 
-### The Recommendation Algorithm
-
-#TODO
+> [!NOTE]
+> The top 5 recipes are filtered by healthiness via our custom heuristic: "Nutrition Score".
 
 ## Significance & Novelty
 
