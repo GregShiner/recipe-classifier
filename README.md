@@ -25,9 +25,32 @@ Our application is a Command-Line Interface (CLI) tool, where the user can provi
 - Classifies whether the meal prepared with your selected keywords will be healthy or unhealthy
 - Fetches the top 5 recommended recipes that align with the selected keywords
 
-### The Recommendation Algorithm
+### Application Workflow
 
-#TODO
+```mermaid
+flowchart TD
+    A[Load Data] -->|Spawn Thread| C[Join Thread]
+    B[Ask User for Keywords] --> C
+    C --> D[Vectorize Keywords]
+    D --> E[Classify Keywords Using Pre-trained XGB Model]
+    E --> F[Filter for Recipes With Keywords]
+    F --> G[Sort by Nutrition Score]
+    G --> H[Display the Top 5 Results]
+```
+
+On first run, we download our recipes dataset onto the user's host machine's from our Google Drive.
+Then, the application performs the following steps:
+
+1. Spawns a thread to load dataset in the background
+1. Uses fzf to allow user to fuzzy find (search) and select multiple keywords
+1. Wait for the dataset to be loaded, if it hasn't completed
+1. Vectorize selected keywords in the same order that was used to build the keyword corpus
+1. Classify keywords vector using pre-trained XGB model to figure out healthiness of potential recipe
+1. Filter all recipes for a recipe that has all selected keywords from the user
+1. Get the URLs for the top 5 healthiest filtered recipes
+
+> [!NOTE]
+> The top 5 recipes are filtered by healthiness via our custom heuristic: "Nutrition Score".
 
 ## Significance & Novelty
 
