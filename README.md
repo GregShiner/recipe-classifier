@@ -222,21 +222,107 @@ Using this keyword corpus, we went through every single recipe and transformed t
 
 #### Removing Outliers
 
-- Manually via DataWrangler
+With our nutrient score, we were able to quite easily see meals that were more oriented for parties or had data entry errors, and we went through and removed any recipe that had a nutrient score above 400,000.
+
+We utilized VSCode's Data Wrangler in order to identify outliers, but any recipe score with a nutrient score at this range simply meant that each of their nutrient daily values were nearly hundreds' of times more than the FDA recommendations.
+
+**Before Removing Outliers**
+
+![Nutrient Score Distribution Before Removing Outliers](report_assets/nutrient-score-prefiltered.png)
+
+**After Removing Outliers**
+
+![Nutrient Score Distribution After Removing Outliers](report_assets/nutrient-score-filtered.png)
 
 ## Model Evaluation (Test Results) 
 
-- Explain Execution Context when it came to Model Training & Evaluation (Server Setup)
-- Evaluation Metrics
+We were now able to start training up models that can classify the healthiness potential of a possible meal from keywords provided from a user. However, we have such a large dataset of recipes (450k+ recipes), and a high dimensionality (especially when it came to keywords). As such, we ran all of our model training on all 8 hardware threads of an Intel(R) Xeon(R) CPU E5-2637 v2 @ 3.50GHz.
 
-#### Fit Models
+Before we fit models, we defined that our evaluation metrics. Our problem is a binary classification that takes in keywords in order to evaluate whether the possible meal will be "Healthy" or "Unhealthy", and as such we utilized log loss for our loss function, and utilized accuracy as our main evaluation metric.
 
-- What models did we fit it under?
-- What was its performance?
-- Did it have any issues particular issues?
-- Was its hyperparameters tuned, if so explain how?
-- Show bar graph of model accuracies
+### Fit Classifier Models (& Train Models)
 
+Each of the models were fit with KFold Cross Validation with our dataset, where K was set to 3, in order to prevent overfitting.
+
+#### K Nearest Neighbors (KNN)
+
+We attempted KNN using Scikit-learn's KNNClassifier on our hardware, however this model was near impossible to train as our dataset was too large and the dimensions off the keywords were too much for our hardware to process. From our preliminary results, we had the best result of 0.645 with 11 neighbors, and decided against pursuing hyperparameter training as it would've taken too long and the accuracy was quite poor.
+
+#### Multilayer Perceptron (MLP)
+
+Then, we attempted building a simple neural network with Scikit-learn's MLP Classifier, where the activation function was set to Rectified Linear Units (ReLU) by default. Our initial results were more accurate, but it was still slow to train due to our dataset. However, as the accuracy was higher, we decided to hyperparameter training the MLPClassifier with the following parameters via GridSearchCV:
+
+```
+'hidden_layer_sizes': [(100,), (100, 100), (100, 100, 100)],
+'alpha': [0.0001, 0.001, 0.01]
+```
+
+Our best result was an accuracy of 0.6774 with an alpha of 0.01, and a single hidden layer of 100 neurons using the ReLU activation function.
+
+#### Support Vector Machines (SVM)
+
+Afterwards, we gave SVM a shot, via Scikit-learn's Support Vector Classifier, which happened to do better initially with a 10% sample of our dataset, however by far was the slowest to train, as we delved into hyperparameter tuning on this model (with the entire dataset) for over 72 hours, which resulted in 48 tuned models.
+
+We tuned the following hyperparameters:
+
+```
+'C': [0.1, 1, 10, 100],
+'kernel': ['linear', 'poly', 'rbf', 'sigmoid']
+```
+
+Our best performing model had an accuracy of 0.6752, which utilized the radial basis function for its kernel and C = 1.
+
+As this model performed well, we applied principal component analysis (PCA) in order to reduce the training times, and see some hopes of increasing the accuracy. As such, we applied PCA with the following target variances: 90%, 95%, 99%. Each PCA version of the dataset had also undergone the same hyperparameter tuning with the SVM model. This reduced our components from an initial 315 (derived from the amount of keywords) into 59, 84, and 150 components respectively. Unfortunately, even with the faster training times, the models ended up performing poorer in accuracy. 
+
+#### XGB
+
+Lastly, our best model performer in terms of accuracy and training time, XGBoost (via xgboost's XGBClassifier), trained the fastest and performed the best (27 models within 1 minute across all 8 cores).
+
+We tuned the following parameters with GridSearchCV:
+
+```
+'n_estimators': [100, 200, 300], 
+'max_depth': [3, 5, 7]
+```
+
+The best model resulted with an accuracy of 0.6774 with a max depth of 7 and n_estimators set to 100.
+
+As this model performed so well, we decided delve a bit more and generate precision, f1-score, and recall metrics, alongside a confusion matrix to see where the error in our accuracies is coming from, but it was hard to identify if the problem was leaning towards a certain incorrect classification.
+
+![XGB Confusion Matrix](report_assets/xgb_confusion_matrix.png)
+
+**Classification Report**
+```
+xgb
+              precision    recall  f1-score   support
+
+           0       0.75      0.66      0.70    293882
+           1       0.62      0.71      0.66    228635
+
+    accuracy                           0.68    522517
+   macro avg       0.68      0.69      0.68    522517
+weighted avg       0.69      0.68      0.69    522517
+```
+
+#### XGB + PCA
+
+As XGB was able to train so fast, we delved into applying hyperparameter tuning with the same metrics, but with PCA target variances of 90%, 95%, and 99%. 
+
+We also trained the model with PCA applications of 90%, 95%, 99% (59, 84, and 150 components out of 315) of the target variance alongside the hyperparameter tuning applied within XGB.
+
+Unfortunately, we ended up getting worse accuracies, but it is worth to note that the accuracies were very close to the true value from the original XGB model which used the entire dataset and keywords vector.
+
+| Target Variance (%) | n_components | Accuracy Score (XGB Original = 0.6774) |
+|---------------------|--------------|----------------------------------------|
+| 90                  | 59           | 0.6736                                 |
+| 95                  | 84           | 0.6723                                 |
+| 99                  | 150          | 0.6708                                 |
+
+### Model Evaluation Remarks
+
+Overall, the best performing model was XGB at 0.6774 for our binary classification problem using keywords to identify if the possible recipes that could be made would end up being healthy. Notably, PCA did not improve our accuracies, but did prove that dimensionality reduction is completely possible with a bit of minor loss in accuracies, and most of the models hovered around the 0.6-0.7 range, indicating our data source might be the problem.
+
+![Model Results](report_assets/model_results.png)
 
 ## Discussion
 
