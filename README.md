@@ -326,11 +326,19 @@ Overall, the best performing model was XGB at 0.6774 for our binary classificati
 
 ## Discussion
 
-#TODO
+### Project Issues and Limitations
+
+Many of our issues stem from our large dataset and the encoding format for our keywords. Our training times were heavily impacted because of training using 500,000 recipes, and attempting to use a 315 dimension keyword vector reduced the speed at which training could happen for any type of model. We believe this could have been accelerated if we hand-rolled our own implementations of these classifiers towards a specific GPU-architecture for GPU acceleration, but we did not have the knowledge or time to do so.
+
+Most Importantly, our poor accuracy for our binary classification was alerting at first, but once we saw the trend across multiple models, we wondered if our keyword encoding was incorrect, however this turned out to not be the case, as we started manually reviewing the keywords for certain recipes and noticed there were some inaccurate keywords tied to certain recipes. Moreover, we manually tagged each recipe as healthy or unhealthy based on our own subjective definition derived from the FDA's recommendations of Daily Value, which could be the source of our error. Our nutrition score isn't factually based, and each nutrient is being taken into account at the same weight. As such, this could have caused our keywords to have little to no correlation with our manual tagging of each recipe's healthiness status (nutrition score).
+
+### Course Learnings
+
+We applied numerous aspects of this course's learnings, as we initially kicked off this project with a bit of exploratory data analysis, where we utilized VSCode's Data Wrangler extension to visually analyze for outliers. Furthermore, we applied our own function in order to preprocess the data into the format which we desired, so we could classify keywords into whether it would lead to a healthy recipe being made. Lastly, we trained various models that were taught in the class and performed hyperparameter tuning on the models, alongside training the models with small samples in order to evaluate their initial performance.
 
 ## Conclusion
 
-#TODO
+Overall, we hoped for better accuracies but ran into many issues from our data source, and hope to improve our definition of what comprises a healthy recipe / meal. With the input of a nutritionist, and a more concrete definition of a meal's healthiness, then I believe we could improve our accuracies by leaps and bounds.
 
 ## Production Environment Dependency Requirements
 
