@@ -108,11 +108,6 @@ def main():
 
     # Find the top 5 lowest NutrientScore recipes
     top_5 = df.sort('NutrientScore').head(5)
-    # Drop all List columns
-    for column in top_5.columns:
-        if isinstance(top_5[column].dtype, pl.List):
-            top_5 = top_5.drop(column)
-    top_5.write_csv('top_5.csv')
 
     # Create a new column called "FormattedName"
     def format_name(name):
